@@ -68,12 +68,17 @@ func main() {
 	}
 	output := bufio.NewWriter(outputFile)
 
+	total := 0
 	for r, freq := range freqs {
 		output.WriteRune(r)
 		output.WriteString(": ")
 		output.WriteString(strconv.Itoa(freq))
 		output.WriteByte('\n')
+		total += freq
 	}
+
+	output.WriteString("\nTotal: ")
+	output.WriteString(strconv.Itoa(total))
 
 	output.Flush()
 	outputFile.Close()
